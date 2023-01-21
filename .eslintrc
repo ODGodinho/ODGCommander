@@ -2,5 +2,8 @@
     "env": {
         "jest": true
     },
-    "extends": [ "@odg" ]
+    "extends": [ "@odg" ],
+    "rules": {
+        "security/detect-non-literal-fs-filename": "off"
+    }
 }

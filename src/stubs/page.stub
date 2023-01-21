@@ -1,0 +1,45 @@
+import { type PageInterface } from "@odg/chemical-x";
+import { injectable } from "inversify";
+
+import {
+    type {{ PageName:UCFirst }}SelectorsType,
+    {{ PageName }}Selectors,
+} from "../../Selectors";
+import { BasePage } from "../BasePage";
+
+/**
+ * Generated page {{ PageName:UCFirst }}
+ *
+ * @author
+ */
+@injectable()
+export class {{ PageName:UCFirst }}Page extends BasePage implements PageInterface {
+
+    /**
+     * Selectors to {{ PageName:UCFirst }}Page
+     *
+     * @type {{{ PageName:UCFirst }}SelectorsType}
+     */
+    public $s: {{ PageName:UCFirst }}SelectorsType = {{ PageName }}Selectors;
+
+    /**
+     * Execute this step
+     *
+     * @returns {Promise<void>}
+     */
+    public async execute(): Promise<void> {
+        await this.start(async () => {
+            await this.preStart();
+        });
+    }
+
+    /**
+     * Number of attempt this step
+     *
+     * @returns {Promise<number>}
+     */
+    public async attempt(): Promise<number> {
+        return 1;
+    }
+
+}

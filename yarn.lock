@@ -936,6 +936,13 @@
   dependencies:
     "@octokit/openapi-types" "^14.0.0"
 
+"@odg/chemical-x@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@odg/chemical-x/-/chemical-x-1.2.0.tgz#8c98fdf6e4f8ff879f213f8fb94e2b4dc605edef"
+  integrity sha512-SvO4pPRIsD2DjRlWaHHP1DkM0vzvNvdlMSSfvBsEsCaEcNXUm7g9pHYntJBg81SbfJlga7vB+HrDIgT3xXfcTw==
+  dependencies:
+    "@odg/exception" "*"
+
 "@odg/eslint-config@*":
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/@odg/eslint-config/-/eslint-config-1.8.0.tgz#d77719387107f77d17292a415eaafee899fb61fc"
@@ -969,6 +976,13 @@
     eslint-plugin-unicorn "^45.0.2"
     eslint-plugin-yml "^1.3.0"
     toml-eslint-parser "^0.4.0"
+
+"@odg/exception@*", "@odg/exception@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@odg/exception/-/exception-1.3.0.tgz#6836756f86242c7089fd86753dbafd442fc21ca8"
+  integrity sha512-z5Ka10qpQpel/QQzL4wLvye4Q1c16mnxgG9Dd6WN+co/SiCctfjj0epCyqIL72vcO/A/ND+saJI0Jh09lW2i/g==
+  dependencies:
+    "@odg/tsconfig" "*"
 
 "@odg/tsconfig@*":
   version "1.0.0"
@@ -1993,6 +2007,11 @@ columnify@^1.6.0:
   dependencies:
     strip-ansi "^6.0.1"
     wcwidth "^1.0.0"
+
+commander@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-10.0.0.tgz#71797971162cd3cf65f0b9d24eb28f8d303acdf1"
+  integrity sha512-zS5PnTI22FIRM6ylNW8G4Ap0IEOyk62fhLSD0+uHRT9McRCLGpkVNvao4bjimpK/GShynyQkFFxHhwMcETmduA==
 
 comment-parser@1.3.1, comment-parser@^1.1.2:
   version "1.3.1"
