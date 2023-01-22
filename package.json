@@ -1,6 +1,6 @@
 {
     "name": "@odg/command",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Stanley TheTemplate for typescript project",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -46,6 +46,7 @@
             "@semantic-release/commit-analyzer",
             "@semantic-release/release-notes-generator",
             "@semantic-release/npm",
+            "@semantic-release/git",
             "@semantic-release/github"
         ]
     },
