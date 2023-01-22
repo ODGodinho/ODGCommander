@@ -7,7 +7,7 @@
     "homepage": "",
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "git+https://github.com/ODGodinho/ODCommander.git"
     },
     "bin": {
         "odg": "./dist/index.js"
