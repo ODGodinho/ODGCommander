@@ -2,10 +2,11 @@ import { type PageInterface } from "@odg/chemical-x";
 import { injectable } from "inversify";
 
 import {
-    type {{ PageName:UCFirst }}SelectorsType,
-    {{ PageName }}Selectors,
-} from "../../Selectors";
-import { BasePage } from "../BasePage";
+    type {{ PageName:UCFirst }}SelectorType,
+    {{ PageName }}Selector,
+} from "../Selectors";
+
+import { BasePage } from "./BasePage";
 
 /**
  * Generated page {{ PageName:UCFirst }}
@@ -16,11 +17,11 @@ import { BasePage } from "../BasePage";
 export class {{ PageName:UCFirst }}Page extends BasePage implements PageInterface {
 
     /**
-     * Selectors to {{ PageName:UCFirst }}Page
+     * Selector to {{ PageName:UCFirst }}Page
      *
-     * @type {{{ PageName:UCFirst }}SelectorsType}
+     * @type {{{ PageName:UCFirst }}SelectorType}
      */
-    public $s: {{ PageName:UCFirst }}SelectorsType = {{ PageName }}Selectors;
+    public $s: {{ PageName:UCFirst }}SelectorType = {{ PageName }}Selector;
 
     /**
      * Execute this step

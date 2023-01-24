@@ -1,21 +1,43 @@
-#!/usr/bin/env node
 import { program } from "commander";
 
-import StubCreator from "./Generators/StubCreator";
-import { Str } from "@odg/chemical-x";
+import MakeFile from "./Generators/MakeFile";
+
+const make = new MakeFile();
+
+const pathOption = "-p, --path <path>";
 
 program
     .command("make:page")
     .name("make:page")
     .argument("<pageName>", "page name create")
+    .option(pathOption, "Destination Page Path", "./src/Pages/")
+    .option("-s, --selectors", "Create Selectors", false)
+    .option("-sp, --selectorPath", "Selector Path", "./src/Selectors/")
+    .option("-hp, --handlerPath", "Handler Path", "./src/Handlers/")
+    .option("--handler-from <handlerFrom>", "Use If Handler From")
+    .option("--handler-to <handlerTo>", "Use if Handler To")
     .description("Test command description")
     .version("0.1.1")
-    .action(async (pageName: string) => {
-        const stubCreator = new StubCreator();
-        await stubCreator.create("page", `${pageName}Page`, "./", {
-            "PageName:UCFirst": new Str(pageName).ucFirst().toString(),
-            "PageName": pageName.charAt(0).toLowerCase() + pageName.slice(1),
-        });
-    });
+    .action(make.makePage.bind(make));
+
+program
+    .command("make:selector")
+    .name("make:selector")
+    .argument("<selectorName>", "selector of page name")
+    .option(pathOption, "Destination Selector Path", "./src/Selectors/")
+    .description("Test command description")
+    .version("0.1.1")
+    .action(make.makeSelectors.bind(make));
+
+program
+    .command("make:handler")
+    .name("make:handler")
+    .argument("<handlerName>", "selector of page name")
+    .option("--handler-from <handlerFrom>", "handler source page")
+    .option("--handler-to <handlerFrom>", "handle landing page")
+    .option(pathOption, "Destination Path", "./src/Handlers/")
+    .description("Make Handler file")
+    .version("0.1.1")
+    .action(make.makeHandler.bind(make));
 
 program.parse();

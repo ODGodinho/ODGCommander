@@ -1,5 +1,5 @@
 import * as Filesystem from "node:fs";
-import * as nodePath from "node:path";
+import nodePath from "node:path";
 import { promisify } from "node:util";
 
 import { Str } from "@odg/chemical-x";
@@ -23,6 +23,8 @@ export default class StubCreator {
         }
 
         const content = await this.getStub(stub, variables);
+
+        await promisify(this.filesystem.mkdir)(pathDestination, { recursive: true });
         await promisify(this.filesystem.writeFile)(destination, content, {});
 
         return destination;
@@ -36,7 +38,8 @@ export default class StubCreator {
      * @returns {string}
      */
     public async getStub(name: string, variables: Record<string, number | string>): Promise<string> {
-        const file = await promisify(this.filesystem.readFile)(`${this.getStubPath()}/${name}.stub`);
+        const pathStub = await this.getStubPath(name);
+        const file = await promisify(this.filesystem.readFile)(`${pathStub}/${name}.stub`);
 
         return new Str(file.toString())
             .formatUnicorn(variables)
@@ -57,10 +60,15 @@ export default class StubCreator {
     /**
      * Get the path to the stubs.
      *
+     * @param {string} name Stub File Name
      * @returns {string}
      */
-    public getStubPath(): string {
-        return nodePath.resolve("src/stubs/");
+    public async getStubPath(name: string): Promise<string> {
+        if (this.filesystem.existsSync(`${nodePath.resolve("./stubs")}/${name}.stub`)) {
+            return nodePath.resolve("./stubs");
+        }
+
+        return nodePath.join(process.cwd(), "node_modules/@odg/command/stubs");
     }
 
 }

@@ -1,0 +1,96 @@
+import {
+    type HandlerInterface,
+    type HandlerFunction,
+    HandlerSolution,
+    RetryAction,
+} from "@odg/chemical-x";
+import { type Exception } from "@odg/exception";
+import { injectable } from "inversify";
+
+import { BaseHandler } from "./BaseHandler";
+
+@injectable()
+export class {{ OriginHandler:UcFirst }}To{{ DestinationHandler:UcFirst }}Handler extends BaseHandler implements HandlerInterface {
+
+    public async waitForHandler(): Promise<HandlerFunction> {
+        return Promise.race([
+            this.identifySuccess(),
+            this.identifyExample(),
+        ]);
+    }
+
+    /**
+     * Return timeout for handler
+     *
+     * @returns {Promise<number>}
+     */
+    public async getTimeout(): Promise<number> {
+        return 30_000;
+    }
+
+    /**
+     * Return number attempt to test this handler
+     *
+     * @returns {Promise<number>}
+     */
+    public async attempt(): Promise<number> {
+        return 5;
+    }
+
+    /**
+     * Called Always handler attempt error.
+     *
+     * @param {Exception} exception Exception error
+     * @param {number} attempt Current attempt
+     * @returns {Promise<RetryAction>}
+     */
+    public async failedWait(exception: Exception, attempt: number): Promise<RetryAction> {
+        await this.log.debug(`Step {{ OriginHandler:UcFirst }}To{{ DestinationHandler:UcFirst }}Handler: Failed Attempt ${attempt}.`);
+        await this.log.warning(exception.message);
+
+        return RetryAction.Default;
+    }
+
+    /**
+     * Handler finish with success after all attempts
+     *
+     * @returns {Promise<void>}
+     */
+    public async success(): Promise<void> {
+        await this.log.debug("Step {{ OriginHandler:UcFirst }}To{{ DestinationHandler:UcFirst }}Handler finish with success.");
+    }
+
+    /**
+     * Identify if found success page
+     *
+     * @example https://example.print.com/example.png
+     *
+     * @returns {Promise<HandlerFunction>}
+     */
+    public async identifySuccess(): Promise<HandlerFunction> {
+        return this.page.waitForSelector(this.$$s.example.success, { timeout: await this.getTimeout() })
+            .then(() => this.successSolution.bind(this));
+    }
+
+    /**
+     * Identify example handler
+     *
+     * @example https://example.print.com/example.png
+     *
+     * @returns {Promise<HandlerFunction>}
+     */
+    public async identifyExample(): Promise<HandlerFunction> {
+        return this.page.waitForSelector(this.$$s.example.example2, { timeout: await this.getTimeout() })
+            .then(() => this.exampleSolution.bind(this));
+    }
+
+    /**
+     * Action if example handler
+     *
+     * @returns {Promise<HandlerSolution>}
+     */
+    public async exampleSolution(): Promise<HandlerSolution> {
+        return HandlerSolution.Resolve;
+    }
+
+}
