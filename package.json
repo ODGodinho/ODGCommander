@@ -10,7 +10,7 @@
         "url": "git+https://github.com/ODGodinho/ODCommander.git"
     },
     "bin": {
-        "odg": "./dist/index.js"
+        "odg": "./odg.js"
     },
     "scripts": {
         "build": "rimraf build && tsc --project ./tsconfig.build.json",
@@ -51,6 +51,7 @@
         ]
     },
     "files": [
+        "odg.js",
         "./dist/",
         "./README.md"
     ],
