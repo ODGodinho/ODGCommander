@@ -4,7 +4,9 @@ import StubCreator from "./StubCreator";
 
 interface MakePageInterface {
     selectors: boolean;
+    event: boolean;
     path: string;
+    eventPath?: string;
     selectorPath?: string;
     handlerPath?: string;
     handlerFrom?: string;
@@ -19,6 +21,10 @@ interface MakeHandlerInterface {
     path: string;
     handlerFrom?: string;
     handlerTo?: string;
+}
+
+interface MakeEventInterface {
+    path: string;
 }
 
 export default class MakeFile {
@@ -40,6 +46,10 @@ export default class MakeFile {
 
         if (options.selectors && options.selectorPath) {
             await this.makeSelectors(pageName, { path: options.selectorPath });
+        }
+
+        if (options.event && options.eventPath) {
+            await this.makeEvent(pageName, { path: options.eventPath });
         }
 
         if (options.handlerPath && (options.handlerFrom ?? options.handlerTo)) {
@@ -75,7 +85,7 @@ export default class MakeFile {
     /**
      * Use this function to create handler file
      *
-     * @param {string} handlerName Handler file name
+     * @param {string} handlerName Handler name
      * @param {MakeHandlerInterface} options Options command
      * @returns {Promise<void>}
      */
@@ -87,6 +97,25 @@ export default class MakeFile {
         const filePath = await stubCreator.create("handler", `${handlerFrom}To${handlerTo}Handler`, options.path, {
             "OriginHandler:UcFirst": handlerFrom,
             "DestinationHandler:UcFirst": handlerTo,
+        });
+
+        console.log(`Handler created successfully in : ${filePath}`);
+    }
+
+    /**
+     * Use this function to create handler file
+     *
+     * @param {string} eventName Event name
+     * @param {MakeEventInterface} options Options command
+     * @returns {Promise<void>}
+     */
+    public async makeEvent(eventName: string, options: MakeEventInterface): Promise<void> {
+        const stubCreator = new StubCreator();
+        const pageUcFirst = new Str(eventName).ucFirst().toString();
+
+        const filePath = await stubCreator.create("event", `${pageUcFirst}EventListener`, options.path, {
+            "EventName:UcFirst": pageUcFirst,
+            "EventName": eventName.charAt(0).toLowerCase() + eventName.slice(1),
         });
 
         console.log(`Handler created successfully in : ${filePath}`);

@@ -13,6 +13,8 @@ program
     .option(pathOption, "Destination Page Path", "./src/Pages/")
     .option("-s, --selectors", "Create Selectors", false)
     .option("-sp, --selectorPath", "Selector Path", "./src/Selectors/")
+    .option("-ev, --event", "Create Event", false)
+    .option("-evp, --eventPath", "Event Path", "./src/app/Listeners")
     .option("-hp, --handlerPath", "Handler Path", "./src/Handlers/")
     .option("--handler-from <handlerFrom>", "Use If Handler From")
     .option("--handler-to <handlerTo>", "Use if Handler To")
@@ -39,5 +41,14 @@ program
     .description("Make Handler file")
     .version("0.1.1")
     .action(make.makeHandler.bind(make));
+
+program
+    .command("make:event")
+    .name("make:event")
+    .argument("<eventName>", "EventName")
+    .option(pathOption, "Destination Path", "./src/app/Listeners")
+    .description("Create EventListener file example")
+    .version("0.1.1")
+    .action(make.makeEvent.bind(make));
 
 program.parse();

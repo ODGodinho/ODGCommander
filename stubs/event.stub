@@ -1,0 +1,26 @@
+import type { EventListenerInterface } from "@odg/events";
+import { LoggerInterface } from "@odg/log";
+import { inject, injectable } from "inversify";
+
+import type { EventBrowserParameters, EventTypes } from "#types/EventsInterface";
+import { ContainerName, type EventName } from "@enums";
+import { PageOrHandlerFactoryType } from "@factory/PageFactory";
+import type { {{ EventName:UCFirst }}Page } from "@pages/{{ EventName:UCFirst }}Page";
+
+@injectable()
+export class {{ EventName:UCFirst }}EventListener implements EventListenerInterface<EventTypes, EventName.{{ EventName:UCFirst }}PageEvent> {
+
+    @inject(ContainerName.Logger)
+    public readonly log!: LoggerInterface;
+
+    @inject(ContainerName.{{ EventName:UCFirst }}Page)
+    public readonly {{ EventName }}Page!: PageOrHandlerFactoryType<{{ EventName:UCFirst }}Page>;
+
+    public async handler({ page }: EventBrowserParameters): Promise<void> {
+        await this.log.debug("SearchEventListeners is sended");
+
+        const myStep = this.{{ EventName }}Page(page);
+        await myStep.execute();
+    }
+
+}
