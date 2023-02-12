@@ -53,6 +53,7 @@
     "files": [
         "odg.js",
         "./dist/",
+        "./stubs/",
         "./README.md"
     ],
     "author": "Dragons Gamers <https://www.linkedin.com/in/victor-alves-odgodinho>",
