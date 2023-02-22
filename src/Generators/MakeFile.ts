@@ -27,6 +27,11 @@ interface MakeEventInterface {
     path: string;
 }
 
+interface MakeExceptionInterface {
+    path: string;
+    unknown: boolean;
+}
+
 export default class MakeFile {
 
     /**
@@ -119,6 +124,26 @@ export default class MakeFile {
         });
 
         console.log(`Handler created successfully in : ${filePath}`);
+    }
+
+    /**
+     * Use this function to create exception file
+     *
+     * @param {string} exceptionName Exception name
+     * @param {MakeExceptionInterface} options Options command
+     * @returns {Promise<void>}
+     */
+    public async makeException(exceptionName: string, options: MakeExceptionInterface): Promise<void> {
+        const stubCreator = new StubCreator();
+        const exceptionUcFirst = new Str(exceptionName).ucFirst().toString();
+        const exceptionType = options.unknown ? "UnknownException" : "Exception";
+
+        const filePath = await stubCreator.create("exception", `${exceptionUcFirst}${exceptionType}`, options.path, {
+            "ExceptionType": exceptionType,
+            "ExceptionName": exceptionUcFirst,
+        });
+
+        console.log(`Exception created successfully in : ${filePath}`);
     }
 
 }

@@ -46,9 +46,19 @@ program
     .command("make:event")
     .name("make:event")
     .argument("<eventName>", "EventName")
-    .option(pathOption, "Destination Path", "./src/app/Listeners")
+    .option(pathOption, "Destination EventListener Path", "./src/app/Listeners")
     .description("Create EventListener file example")
     .version("0.1.1")
     .action(make.makeEvent.bind(make));
+
+program
+    .command("make:exception")
+    .name("make:exception")
+    .argument("<exceptionName>", "ExceptionName")
+    .option("-u, --unknown", "UnknownException", false)
+    .option(pathOption, "Destination Exception Path", "./src/Exceptions")
+    .description("Create Exception file example")
+    .version("0.1.1")
+    .action(make.makeException.bind(make));
 
 program.parse();

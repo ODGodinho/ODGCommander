@@ -1,0 +1,9 @@
+import { {{ ExceptionType }} } from "@odg/exception";
+
+/**
+ * {{ ExceptionName }} {{ ExceptionType }} class
+ *
+ * @generator
+ */
+export default class {{ ExceptionName }}{{ ExceptionType }} extends {{ ExceptionType }} {
+}
