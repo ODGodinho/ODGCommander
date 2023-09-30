@@ -64,7 +64,7 @@
     "devDependencies": {
         "@odg/eslint-config": "*",
         "@odg/tsconfig": "*",
-        "@types/node": "^18",
+        "@types/node": ">=18",
         "@vitest/coverage-v8": "*",
         "eslint": "*",
         "husky": "^8.0.3",
