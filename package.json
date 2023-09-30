@@ -1,7 +1,7 @@
 {
     "name": "@odg/command",
     "version": "1.1.0",
-    "description": "Stanley TheTemplate for typescript project",
+    "description": "ODGCommander used to create files based in stubs",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "homepage": "",
@@ -79,6 +79,6 @@
     "dependencies": {
         "@odg/chemical-x": "*",
         "@odg/exception": "*",
-        "commander": "^10.0.0"
+        "commander": "^11.0.0"
     }
 }
