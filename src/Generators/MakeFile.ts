@@ -46,7 +46,7 @@ export default class MakeFile {
         const pageUcFirst = new Str(pageName).ucFirst().toString();
         const filePath = await stubCreator.create("page", `${pageUcFirst}Page`, options.path, {
             "PageName:UCFirst": pageUcFirst,
-            "PageName": pageName.charAt(0).toLowerCase() + pageName.slice(1),
+            "PageName:LCFirst": pageName.charAt(0).toLowerCase() + pageName.slice(1),
         });
 
         if (options.selectors && options.selectorPath) {
@@ -81,7 +81,7 @@ export default class MakeFile {
 
         const filePath = await stubCreator.create("selector", `${pageUcFirst}Selector`, options.path, {
             "SelectorName:UCFirst": pageUcFirst,
-            "SelectorName": selectorName.charAt(0).toLowerCase() + selectorName.slice(1),
+            "SelectorName:LCFirst": selectorName.charAt(0).toLowerCase() + selectorName.slice(1),
         });
 
         console.log(`Selector created successfully in : ${filePath}`);
@@ -100,8 +100,8 @@ export default class MakeFile {
         const handlerTo = options.handlerTo ?? handlerName;
 
         const filePath = await stubCreator.create("handler", `${handlerFrom}To${handlerTo}Handler`, options.path, {
-            "OriginHandler:UcFirst": handlerFrom,
-            "DestinationHandler:UcFirst": handlerTo,
+            "OriginHandler:UCFirst": handlerFrom,
+            "DestinationHandler:UCFirst": handlerTo,
         });
 
         console.log(`Handler created successfully in : ${filePath}`);
@@ -119,8 +119,8 @@ export default class MakeFile {
         const pageUcFirst = new Str(eventName).ucFirst().toString();
 
         const filePath = await stubCreator.create("event", `${pageUcFirst}EventListener`, options.path, {
-            "EventName:UcFirst": pageUcFirst,
-            "EventName": eventName.charAt(0).toLowerCase() + eventName.slice(1),
+            "EventName:UCFirst": pageUcFirst,
+            "EventName:LCFirst": eventName.charAt(0).toLowerCase() + eventName.slice(1),
         });
 
         console.log(`Handler created successfully in : ${filePath}`);

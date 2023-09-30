@@ -1,12 +1,12 @@
 import { type PageInterface } from "@odg/chemical-x";
 import { injectable } from "inversify";
 
+import { ConfigName } from "@app/Enums";
+import { BasePage } from "@pages/BasePage";
 import {
     type {{ PageName:UCFirst }}SelectorType,
-    {{ PageName }}Selector,
-} from "../Selectors";
-
-import { BasePage } from "./BasePage";
+    {{ PageName:LCFirst }}Selector,
+} from "@selectors";
 
 /**
  * Generated page {{ PageName:UCFirst }}
@@ -21,7 +21,7 @@ export class {{ PageName:UCFirst }}Page extends BasePage implements PageInterfac
      *
      * @type {{{ PageName:UCFirst }}SelectorType}
      */
-    public $s: {{ PageName:UCFirst }}SelectorType = {{ PageName }}Selector;
+    public $s: {{ PageName:UCFirst }}SelectorType = {{ PageName:LCFirst }}Selector;
 
     /**
      * Execute this step
@@ -40,7 +40,7 @@ export class {{ PageName:UCFirst }}Page extends BasePage implements PageInterfac
      * @returns {Promise<number>}
      */
     public async attempt(): Promise<number> {
-        return 1;
+        return this.config.get(ConfigName.PAGE_ATTEMPT);
     }
 
 }

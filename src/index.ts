@@ -14,7 +14,7 @@ program
     .option("-s, --selectors", "Create Selectors", false)
     .option("-sp, --selectorPath", "Selector Path", "./src/Selectors/")
     .option("-ev, --event", "Create Event", false)
-    .option("-evp, --eventPath", "Event Path", "./src/app/Listeners")
+    .option("-evp, --eventPath", "Event Path", "./src/app/Listeners/")
     .option("-hp, --handlerPath", "Handler Path", "./src/Handlers/")
     .option("--handler-from <handlerFrom>", "Use If Handler From")
     .option("--handler-to <handlerTo>", "Use if Handler To")

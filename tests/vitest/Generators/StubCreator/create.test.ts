@@ -6,7 +6,7 @@ import StubCreator from "../../../../src/Generators/StubCreator";
 
 describe("Create Page StubTest", () => {
     const stubCreator = new StubCreator();
-    const path = `${process.cwd()}/tests/jest/cache`;
+    const path = `${process.cwd()}/tests/vitest/cache`;
     const filePath = `${path}/ExamplePage.ts`;
 
     afterAll(async () => unlink(`${path}/ExamplePage.ts`).catch(() => null));

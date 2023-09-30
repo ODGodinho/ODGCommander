@@ -1,14 +1,16 @@
 import { existsSync } from "node:fs";
 import { unlink } from "node:fs/promises";
 
+import { vi } from "vitest";
+
 import MakeFile from "../../../../src/Generators/MakeFile";
 
 describe("makeEvent Test", () => {
-    jest.spyOn(console, "log").mockImplementation(() => void 0);
+    vi.spyOn(console, "log").mockImplementation(() => void 0);
 
     const make = new MakeFile();
 
-    const path = `${process.cwd()}/tests/jest/cache`;
+    const path = `${process.cwd()}/tests/vitest/cache`;
     const filePath1 = `${path}/LoginException.ts`;
     const filePath2 = `${path}/LoginUnknownException.ts`;
 

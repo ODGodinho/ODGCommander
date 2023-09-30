@@ -7,15 +7,16 @@ import {
 import { type Exception } from "@odg/exception";
 import { injectable } from "inversify";
 
-import { BaseHandler } from "./BaseHandler";
+import { ConfigName, EventName } from "@enums";
+import { BaseHandler } from "@handlers/BaseHandler";
 
 @injectable()
-export class {{ OriginHandler:UcFirst }}To{{ DestinationHandler:UcFirst }}Handler extends BaseHandler implements HandlerInterface {
+export class {{ OriginHandler:UCFirst }}To{{ DestinationHandler:UCFirst }}Handler extends BaseHandler implements HandlerInterface {
 
     public async waitForHandler(): Promise<HandlerFunction> {
         return Promise.race([
             this.identifySuccess(),
-            this.identifyExample(),
+            this.identifyError(),
         ]);
     }
 
@@ -25,7 +26,7 @@ export class {{ OriginHandler:UcFirst }}To{{ DestinationHandler:UcFirst }}Handle
      * @returns {Promise<number>}
      */
     public async getTimeout(): Promise<number> {
-        return 30_000;
+        return this.config.get(ConfigName.HANDLER_TIMEOUT);
     }
 
     /**
@@ -34,7 +35,7 @@ export class {{ OriginHandler:UcFirst }}To{{ DestinationHandler:UcFirst }}Handle
      * @returns {Promise<number>}
      */
     public async attempt(): Promise<number> {
-        return 5;
+        return this.config.get(ConfigName.HANDLER_ATTEMPT);
     }
 
     /**
@@ -45,7 +46,7 @@ export class {{ OriginHandler:UcFirst }}To{{ DestinationHandler:UcFirst }}Handle
      * @returns {Promise<RetryAction>}
      */
     public async failedWait(exception: Exception, attempt: number): Promise<RetryAction> {
-        await this.log.debug(`Step {{ OriginHandler:UcFirst }}To{{ DestinationHandler:UcFirst }}Handler: Failed Attempt ${attempt}.`);
+        await this.log.debug(`Step {{ OriginHandler:UCFirst }}To{{ DestinationHandler:UCFirst }}Handler: Failed Attempt ${attempt}.`);
         await this.log.warning(exception.message);
 
         return RetryAction.Default;
@@ -57,7 +58,7 @@ export class {{ OriginHandler:UcFirst }}To{{ DestinationHandler:UcFirst }}Handle
      * @returns {Promise<void>}
      */
     public async success(): Promise<void> {
-        await this.log.debug("Step {{ OriginHandler:UcFirst }}To{{ DestinationHandler:UcFirst }}Handler finish with success.");
+        await this.log.debug("Step {{ OriginHandler:UCFirst }}To{{ DestinationHandler:UCFirst }}Handler finish with success.");
     }
 
     /**
@@ -79,7 +80,7 @@ export class {{ OriginHandler:UcFirst }}To{{ DestinationHandler:UcFirst }}Handle
      *
      * @returns {Promise<HandlerFunction>}
      */
-    public async identifyExample(): Promise<HandlerFunction> {
+    public async identifyError(): Promise<HandlerFunction> {
         return this.page.waitForSelector(this.$$s.example.example2, { timeout: await this.getTimeout() })
             .then(() => this.exampleSolution.bind(this));
     }

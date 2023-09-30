@@ -27,6 +27,11 @@ export default class StubCreator {
         await promisify(this.filesystem.mkdir)(pathDestination, { recursive: true });
         await promisify(this.filesystem.writeFile)(destination, content, {});
 
+        const indexFile = `${pathDestination}/index.ts`;
+        if (this.filesystem.existsSync(indexFile)) {
+            await promisify(this.filesystem.appendFile)(indexFile, `export * from "./${name}";\n`, {});
+        }
+
         return destination;
     }
 
@@ -35,7 +40,7 @@ export default class StubCreator {
      *
      * @param {string} name Name file stub
      * @param {Record<string, number | string>} variables Variable to replace in stub
-     * @returns {string}
+     * @returns {Promise<string>}
      */
     public async getStub(name: string, variables: Record<string, number | string>): Promise<string> {
         const pathStub = await this.getStubPath(name);
@@ -51,7 +56,7 @@ export default class StubCreator {
      *
      * @param {string} name Generate file name
      * @param {string} path File path destination
-     * @returns {string}
+     * @returns {Promise<string>}
      */
     public async getPath(name: string, path: string): Promise<string> {
         return `${path}/${name}.ts`;
@@ -61,7 +66,7 @@ export default class StubCreator {
      * Get the path to the stubs.
      *
      * @param {string} name Stub File Name
-     * @returns {string}
+     * @returns {Promise<string>}
      */
     public async getStubPath(name: string): Promise<string> {
         if (this.filesystem.existsSync(`${nodePath.resolve("./stubs")}/${name}.stub`)) {

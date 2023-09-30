@@ -1,25 +1,25 @@
-import type { EventListenerInterface } from "@odg/events";
+import { type EventListenerInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
 import { inject, injectable } from "inversify";
 
-import type { EventBrowserParameters, EventTypes } from "#types/EventsInterface";
+import { type EventBrowserParameters, type EventTypes } from "#types/EventsInterface";
 import { ContainerName, type EventName } from "@enums";
-import { PageOrHandlerFactoryType } from "@factory/PageFactory";
-import type { {{ EventName:UCFirst }}Page } from "@pages/{{ EventName:UCFirst }}Page";
+import { PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
+import { {{ EventName:UCFirst }}Page } from "@pages/{{ EventName:UCFirst }}Page";
 
 @injectable()
 export class {{ EventName:UCFirst }}EventListener implements EventListenerInterface<EventTypes, EventName.{{ EventName:UCFirst }}PageEvent> {
 
-    @inject(ContainerName.Logger)
-    public readonly log!: LoggerInterface;
-
-    @inject(ContainerName.{{ EventName:UCFirst }}Page)
-    public readonly {{ EventName }}Page!: PageOrHandlerFactoryType<{{ EventName:UCFirst }}Page>;
+    public constructor(
+        @inject(ContainerName.Logger) public readonly log: LoggerInterface,
+        @inject(ContainerName.{{ EventName:UCFirst }}PageFactory) public readonly {{ EventName:LCFirst }}PageFactory: PageOrHandlerFactoryType<{{ EventName:UCFirst }}Page>,
+    ) {
+    }
 
     public async handler({ page }: EventBrowserParameters): Promise<void> {
         await this.log.debug("SearchEventListeners is sended");
 
-        const myStep = this.{{ EventName }}Page(page);
+        const myStep = this.{{ EventName:LCFirst }}PageFactory(page);
         await myStep.execute();
     }
 

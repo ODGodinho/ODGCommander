@@ -1,5 +1,5 @@
-export const {{ SelectorName }}Selector = {
+export const {{ SelectorName:LCFirst }}Selector = {
     example: "#example",
 };
 
-export type {{ SelectorName:UCFirst }}SelectorType = typeof {{ SelectorName }}Selector;
+export type {{ SelectorName:UCFirst }}SelectorType = typeof {{ SelectorName:LCFirst }}Selector;
