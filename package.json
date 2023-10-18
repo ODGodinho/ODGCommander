@@ -13,8 +13,8 @@
         "odg": "./odg.js"
     },
     "scripts": {
-        "build": "rimraf build && tsc --project ./tsconfig.build.json",
-        "build:watch": "rimraf build && tsc --project ./tsconfig.build.json -w",
+        "build": "rimraf dist && tsc --project ./tsconfig.build.json",
+        "build:watch": "rimraf dist && tsc --project ./tsconfig.build.json -w",
         "dev": "tsx ./src/index.ts",
         "odg": "tsx ./src/index.ts",
         "start": "node ./dist/index.ts",
@@ -71,7 +71,7 @@
         "lint-staged": "^14.0.1",
         "rimraf": "^5.0.5",
         "tsc-alias": "^1.8.8",
-        "tsx": "^3.13.0",
+        "tsx": "^3.14.0",
         "typescript": "^5.2.2",
         "vite-tsconfig-paths": "*",
         "vitest": "^0.34.6"
