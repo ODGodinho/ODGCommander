@@ -64,21 +64,20 @@
     "devDependencies": {
         "@odg/eslint-config": "*",
         "@odg/tsconfig": "*",
-        "@types/node": ">=18",
-        "@vitest/coverage-v8": "*",
-        "eslint": "*",
-        "husky": "^8.0.3",
-        "lint-staged": "^15.0.1",
-        "rimraf": "^5.0.5",
-        "tsc-alias": "^1.8.8",
-        "tsx": "^3.14.0",
-        "typescript": "^5.2.2",
-        "vite-tsconfig-paths": "*",
-        "vitest": "^0.34.6"
+        "@types/node": ">=20",
+        "@vitest/coverage-v8": "^1",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.2.10",
+        "rimraf": "*",
+        "tsc-alias": "^1.8.10",
+        "tsx": "^4.19.2",
+        "typescript": "^5.7.2",
+        "vite-tsconfig-paths": "^4",
+        "vitest": "^1"
     },
     "dependencies": {
         "@odg/chemical-x": "*",
         "@odg/exception": "*",
-        "commander": "^11.0.0"
+        "commander": "^12.1.0"
     }
 }

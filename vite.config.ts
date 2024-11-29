@@ -1,20 +1,30 @@
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
 
+const coverage100 = 100;
 const vite = defineConfig({
     test: {
         globals: true,
-        threads: false,
+        pool: "forks",
+        poolOptions: {
+            forks: {
+                maxForks: 1,
+                minForks: 1,
+            },
+        },
         coverage: {
             enabled: true,
             provider: "v8",
-            branches: 100,
-            functions: 100,
-            lines: 100,
-            statements: 100,
+            thresholds: {
+                branches: coverage100,
+                functions: coverage100,
+                lines: coverage100,
+                statements: coverage100,
+            },
             exclude: [
                 "src/index.ts",
                 "src/index.js",
+                "odg.js",
             ],
         },
         setupFiles: [
