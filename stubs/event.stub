@@ -1,13 +1,14 @@
 import { type EventListenerInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
-import { inject, injectable } from "inversify";
+import { inject } from "inversify";
+import { fluentProvide } from "inversify-binding-decorators";
 
 import { type EventBrowserParameters, type EventTypes } from "#types/EventsInterface";
 import { ContainerName, type EventName } from "@enums";
 import { PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
 import { {{ EventName:UCFirst }}Page } from "@pages/{{ EventName:UCFirst }}Page";
 
-@injectable()
+@(fluentProvide(ContainerName.{{ EventName:UCFirst }}EventListener).inSingletonScope().done())
 export class {{ EventName:UCFirst }}EventListener implements EventListenerInterface<EventTypes, EventName.{{ EventName:UCFirst }}PageEvent> {
 
     public constructor(
@@ -17,10 +18,10 @@ export class {{ EventName:UCFirst }}EventListener implements EventListenerInterf
     }
 
     public async handler({ page }: EventBrowserParameters): Promise<void> {
-        await this.log.debug("SearchEventListeners is sended");
+        await this.log.debug("{{ EventName:UCFirst }}EventListener is sended");
 
-        const myStep = this.{{ EventName:LCFirst }}PageFactory(page);
-        await myStep.execute();
+        await this.{{ EventName:LCFirst }}PageFactory(page)
+            .execute();
     }
 
 }

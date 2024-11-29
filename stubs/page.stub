@@ -1,7 +1,6 @@
-import { type PageInterface } from "@odg/chemical-x";
-import { injectable } from "inversify";
+import { ContainerHelper, type PageInterface } from "@odg/chemical-x";
 
-import { ConfigName } from "@app/Enums";
+import { ConfigName, ContainerName } from "@app/Enums";
 import { BasePage } from "@pages/BasePage";
 import {
     type {{ PageName:UCFirst }}SelectorType,
@@ -13,7 +12,7 @@ import {
  *
  * @author
  */
-@injectable()
+@ContainerHelper.injectablePage(ContainerName.{{ PageName:UCFirst }}PageFactory)
 export class {{ PageName:UCFirst }}Page extends BasePage implements PageInterface {
 
     /**
