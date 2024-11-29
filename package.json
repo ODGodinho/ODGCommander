@@ -1,6 +1,6 @@
 {
     "name": "@odg/command",
-    "version": "1.1.0",
+    "version": "1.8.0",
     "description": "ODGCommander used to create files based in stubs",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
