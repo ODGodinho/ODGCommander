@@ -4,10 +4,10 @@
     "description": "ODGCommander used to create files based in stubs",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "homepage": "https://github.com/ODGodinho/ODCommander",
+    "homepage": "https://github.com/ODGodinho/ODGCommander",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ODGodinho/ODCommander"
+        "url": "https://github.com/ODGodinho/ODGCommander"
     },
     "bin": {
         "odg": "./odg.js"
