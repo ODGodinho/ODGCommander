@@ -8,6 +8,7 @@ import { ContainerName, type EventName } from "@enums";
 import { PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
 import { {{ EventName:UCFirst }}Page } from "@pages/{{ EventName:UCFirst }}Page";
 
+@ContainerHelper.registerListener(EventName.{{ EventName:UCFirst }}PageEvent, ContainerName.{{ EventName:UCFirst }}EventListener, {})
 @(fluentProvide(ContainerName.{{ EventName:UCFirst }}EventListener).inSingletonScope().done())
 export class {{ EventName:UCFirst }}EventListener implements EventListenerInterface<EventTypes, EventName.{{ EventName:UCFirst }}PageEvent> {
 
