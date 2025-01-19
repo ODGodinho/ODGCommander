@@ -4,7 +4,7 @@ import { inject } from "inversify";
 import { fluentProvide } from "inversify-binding-decorators";
 
 import { type EventBrowserParameters, type EventTypes } from "#types/EventsInterface";
-import { ContainerName, type EventName } from "@enums";
+import { ContainerName, EventName } from "@enums";
 import { PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
 import { {{ EventName:UCFirst }}Page } from "@pages/{{ EventName:UCFirst }}Page";
 
