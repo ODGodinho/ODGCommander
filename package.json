@@ -1,34 +1,35 @@
 {
     "name": "@odg/command",
-    "version": "1.8.0",
+    "version": "0.0.0",
     "description": "ODGCommander used to create files based in stubs",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "homepage": "https://github.com/ODGodinho/ODCommander.git",
+    "homepage": "https://github.com/ODGodinho/ODCommander",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ODGodinho/ODCommander.git"
+        "url": "https://github.com/ODGodinho/ODCommander"
     },
     "bin": {
         "odg": "./odg.js"
     },
     "scripts": {
-        "build": "rimraf dist && tsc --project ./tsconfig.build.json",
-        "build:watch": "rimraf dist && tsc --project ./tsconfig.build.json -w",
+        "build": "rimraf dist/ && tsc --project ./tsconfig.build.json && tsc-alias -p tsconfig.build.json",
+        "build:watch": "npm run build && (concurrently \"tsc --project ./tsconfig.build.json -w\" \"tsc-alias -p tsconfig.build.json -w\")",
         "dev": "tsx ./src/index.ts",
         "odg": "tsx ./src/index.ts",
-        "start": "node ./dist/index.ts",
+        "start": "node ./dist/index.js",
         "lint": "eslint --ext .js,.jsx,.ts,.tsx,.json,.jsonc,.json5,.yml,.yaml,.xml,.txt,.svg,.properties,.gradle,.java,.cpp,.c,.cs,.html,.css,.groovy,.gitignore,.npmignore,.toml,.env,.example,.sample,.ini,.php,.bat,.powershell,.ps1,.sh,.bash,.eslintrc",
         "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx,.json,.jsonc,.json5,.yml,.yaml,.xml,.txt,.svg,.properties,.gradle,.java,.cpp,.c,.cs,.html,.css,.groovy,.gitignore,.npmignore,.toml,.env,.example,.sample,.ini,.php,.bat,.powershell,.ps1,.sh,.bash,.eslintrc --fix",
+        "prepare": "husky",
         "test": "vitest run",
         "test:ci": "vitest run --passWithNoTests",
         "test:watch": "vitest --watch"
     },
-    "lint-staged": {
-        "*": [ "npm run lint:fix" ]
-    },
     "publishConfig": {
         "access": "public"
+    },
+    "lint-staged": {
+        "*": [ "npm run lint:fix" ]
     },
     "release": {
         "branches": [
@@ -66,6 +67,7 @@
         "@odg/tsconfig": "*",
         "@types/node": ">=20",
         "@vitest/coverage-v8": "^1",
+        "concurrently": "^9.1.2",
         "husky": "^9.1.7",
         "lint-staged": "^15.2.10",
         "rimraf": "*",
@@ -78,6 +80,6 @@
     "dependencies": {
         "@odg/chemical-x": "*",
         "@odg/exception": "*",
-        "commander": "^12.1.0"
+        "commander": "^13.0.0"
     }
 }
