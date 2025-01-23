@@ -1,3 +1,4 @@
+import { ContainerHelper } from "@odg/chemical-x";
 import { type EventListenerInterface } from "@odg/events";
 import { LoggerInterface } from "@odg/log";
 import { inject } from "inversify";
@@ -8,9 +9,9 @@ import { ContainerName, EventName } from "@enums";
 import { PageOrHandlerFactoryType } from "@factory/PageOrHandlerFactory";
 import { {{ EventName:UCFirst }}Page } from "@pages/{{ EventName:UCFirst }}Page";
 
-@ContainerHelper.registerListener(EventName.{{ EventName:UCFirst }}PageEvent, ContainerName.{{ EventName:UCFirst }}EventListener, {})
+@ContainerHelper.registerListener(EventName.{{ EventName:UCFirst }}Event, ContainerName.{{ EventName:UCFirst }}EventListener, {})
 @(fluentProvide(ContainerName.{{ EventName:UCFirst }}EventListener).inSingletonScope().done())
-export class {{ EventName:UCFirst }}EventListener implements EventListenerInterface<EventTypes, EventName.{{ EventName:UCFirst }}PageEvent> {
+export class {{ EventName:UCFirst }}EventListener implements EventListenerInterface<EventTypes, EventName.{{ EventName:UCFirst }}Event> {
 
     public constructor(
         @inject(ContainerName.Logger) public readonly log: LoggerInterface,
