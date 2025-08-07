@@ -29,7 +29,7 @@ export default class StubCreator {
 
         const indexFile = `${pathDestination}/index.ts`;
         if (this.filesystem.existsSync(indexFile)) {
-            await promisify(this.filesystem.appendFile)(indexFile, `export * from "./${name}";\n`, {});
+            await promisify(this.filesystem.appendFile)(indexFile, `\nexport * from "./${name}";\n`, {});
         }
 
         return destination;
