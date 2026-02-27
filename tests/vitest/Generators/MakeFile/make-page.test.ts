@@ -1,14 +1,15 @@
 import { existsSync } from "node:fs";
 import { unlink } from "node:fs/promises";
 
+import { NullLogger } from "@odg/log";
 import { vi } from "vitest";
 
-import MakeFile from "../../../../src/Generators/MakeFile";
+import MakeFile from "src/Generators/MakeFile";
 
 describe("makePage Test", () => {
     vi.spyOn(console, "log").mockImplementation(() => void 0);
 
-    const make = new MakeFile();
+    const make = new MakeFile(new NullLogger());
 
     const path = `${process.cwd()}/tests/vitest/cache`;
     const filePath = `${path}/ExamplePage.ts`;
@@ -30,7 +31,7 @@ describe("makePage Test", () => {
         const makePage = make.makePage(
             "Example",
             {
-                path: path,
+                path,
                 selectors: true,
                 event: true,
                 eventPath: path,
@@ -39,6 +40,7 @@ describe("makePage Test", () => {
                 handlerFrom: "Example",
             },
         );
+
         await expect(makePage)
             .resolves
             .toBeUndefined();
@@ -51,13 +53,14 @@ describe("makePage Test", () => {
         const makePage = make.makePage(
             "Example",
             {
-                path: path,
+                path,
                 selectors: false,
                 event: false,
                 handlerPath: path,
                 handlerTo: "Example",
             },
         );
+
         await expect(makePage)
             .resolves
             .toBeUndefined();

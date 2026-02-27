@@ -3,8 +3,7 @@ import nodePath from "node:path";
 import { promisify } from "node:util";
 
 import { Str } from "@odg/chemical-x";
-
-import { InvalidArgumentException } from "../Exceptions/InvalidArgumentException";
+import { InvalidArgumentException } from "@odg/exception";
 
 export default class StubCreator {
 
@@ -28,6 +27,7 @@ export default class StubCreator {
         await promisify(this.filesystem.writeFile)(destination, content, {});
 
         const indexFile = `${pathDestination}/index.ts`;
+
         if (this.filesystem.existsSync(indexFile)) {
             await promisify(this.filesystem.appendFile)(indexFile, `\nexport * from "./${name}";\n`, {});
         }

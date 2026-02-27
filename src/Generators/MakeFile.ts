@@ -1,4 +1,5 @@
 import { Str } from "@odg/chemical-x";
+import type { LoggerInterface } from "@odg/log";
 
 import StubCreator from "./StubCreator";
 
@@ -29,10 +30,14 @@ interface MakeEventInterface {
 
 interface MakeExceptionInterface {
     path: string;
-    unknown: boolean;
+    isUnknown: boolean;
 }
 
 export default class MakeFile {
+
+    public constructor(private readonly logger: LoggerInterface) {
+
+    }
 
     /**
      * Use this function to create Page Crawler class
@@ -65,13 +70,13 @@ export default class MakeFile {
             });
         }
 
-        console.log(`Page created successfully in : ${filePath}`);
+        await this.logger.info(`Page created successfully in : ${filePath}`);
     }
 
     /**
      * Use this function to create selector class
      *
-     * @param {string} selectorName Selector file name
+     * @param {string} selectorName Page Selector file name
      * @param {MakeSelectorInterface} options Options command
      * @returns {Promise<void>}
      */
@@ -84,13 +89,13 @@ export default class MakeFile {
             "SelectorName:LCFirst": selectorName.charAt(0).toLowerCase() + selectorName.slice(1),
         });
 
-        console.log(`Selector created successfully in : ${filePath}`);
+        await this.logger.info(`Selector created successfully in : ${filePath}`);
     }
 
     /**
      * Use this function to create handler file
      *
-     * @param {string} handlerName Handler name
+     * @param {string} handlerName Handler name to make
      * @param {MakeHandlerInterface} options Options command
      * @returns {Promise<void>}
      */
@@ -104,13 +109,13 @@ export default class MakeFile {
             "DestinationHandler:UCFirst": handlerTo,
         });
 
-        console.log(`Handler created successfully in : ${filePath}`);
+        await this.logger.info(`Handler created successfully in : ${filePath}`);
     }
 
     /**
      * Use this function to create handler file
      *
-     * @param {string} eventName Event name
+     * @param {string} eventName Event name to make
      * @param {MakeEventInterface} options Options command
      * @returns {Promise<void>}
      */
@@ -123,27 +128,27 @@ export default class MakeFile {
             "EventName:LCFirst": eventName.charAt(0).toLowerCase() + eventName.slice(1),
         });
 
-        console.log(`Handler created successfully in : ${filePath}`);
+        await this.logger.info(`Event created successfully in : ${filePath}`);
     }
 
     /**
      * Use this function to create exception file
      *
-     * @param {string} exceptionName Exception name
+     * @param {string} exceptionName Exception name to make
      * @param {MakeExceptionInterface} options Options command
      * @returns {Promise<void>}
      */
     public async makeException(exceptionName: string, options: MakeExceptionInterface): Promise<void> {
         const stubCreator = new StubCreator();
         const exceptionUcFirst = new Str(exceptionName).ucFirst().toString();
-        const exceptionType = options.unknown ? "UnknownException" : "Exception";
+        const exceptionType = options.isUnknown ? "UnknownException" : "Exception";
 
         const filePath = await stubCreator.create("exception", `${exceptionUcFirst}${exceptionType}`, options.path, {
             "ExceptionType": exceptionType,
             "ExceptionName": exceptionUcFirst,
         });
 
-        console.log(`Exception created successfully in : ${filePath}`);
+        await this.logger.info(`Exception created successfully in : ${filePath}`);
     }
 
 }

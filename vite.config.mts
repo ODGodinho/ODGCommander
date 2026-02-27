@@ -6,12 +6,7 @@ const vite = defineConfig({
     test: {
         globals: true,
         pool: "forks",
-        poolOptions: {
-            forks: {
-                maxForks: 1,
-                minForks: 1,
-            },
-        },
+        maxWorkers: 1,
         coverage: {
             enabled: true,
             provider: "v8",
@@ -27,9 +22,7 @@ const vite = defineConfig({
                 "odg.js",
             ],
         },
-        setupFiles: [
-            "./tests/vitest/init.ts",
-        ],
+        setupFiles: [ "./tests/vitest/init.ts" ],
     },
     plugins: [ tsconfigPaths() ],
 

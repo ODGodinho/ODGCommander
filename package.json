@@ -18,8 +18,8 @@
         "dev": "tsx ./src/index.ts",
         "odg": "tsx ./src/index.ts",
         "start": "node ./dist/index.js",
-        "lint": "eslint --ext .js,.jsx,.ts,.tsx,.json,.jsonc,.json5,.yml,.yaml,.xml,.txt,.svg,.properties,.gradle,.java,.cpp,.c,.cs,.html,.css,.groovy,.gitignore,.npmignore,.toml,.env,.example,.sample,.ini,.php,.bat,.powershell,.ps1,.sh,.bash,.eslintrc",
-        "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx,.json,.jsonc,.json5,.yml,.yaml,.xml,.txt,.svg,.properties,.gradle,.java,.cpp,.c,.cs,.html,.css,.groovy,.gitignore,.npmignore,.toml,.env,.example,.sample,.ini,.php,.bat,.powershell,.ps1,.sh,.bash,.eslintrc --fix",
+        "lint": "eslint",
+        "lint:fix": "eslint --fix",
         "prepare": "husky",
         "test": "vitest run",
         "test:ci": "vitest run --passWithNoTests",
@@ -29,7 +29,9 @@
         "access": "public"
     },
     "lint-staged": {
-        "*": [ "npm run lint:fix" ]
+        "*": [
+            "npm run lint:fix"
+        ]
     },
     "release": {
         "branches": [
@@ -65,21 +67,24 @@
     "devDependencies": {
         "@odg/eslint-config": "*",
         "@odg/tsconfig": "*",
-        "@types/node": ">=20",
-        "@vitest/coverage-v8": "^1",
-        "concurrently": "^9.1.2",
+        "@types/node": ">=24",
+        "@vitest/coverage-v8": "^4.0.18",
+        "concurrently": "^9.2.1",
         "husky": "^9.1.7",
-        "lint-staged": "^15.2.10",
+        "lint-staged": "^16.2.7",
+        "reflect-metadata": "^0.2.2",
         "rimraf": "*",
-        "tsc-alias": "^1.8.10",
-        "tsx": "^4.19.2",
-        "typescript": "^5.7.2",
-        "vite-tsconfig-paths": "^4",
-        "vitest": "^1"
+        "tsc-alias": "^1.8.16",
+        "tsx": "^4.21.0",
+        "typescript": "^5.9.3",
+        "vite": "^7.3.1",
+        "vite-tsconfig-paths": "^6.1.1",
+        "vitest": "^4.0.18"
     },
     "dependencies": {
         "@odg/chemical-x": "*",
         "@odg/exception": "*",
+        "@odg/log": "^1.6.1",
         "commander": "^13.0.0"
     }
 }

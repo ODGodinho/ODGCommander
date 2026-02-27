@@ -1,8 +1,9 @@
+import { ConsoleLogger } from "@odg/log";
 import { program } from "commander";
 
 import MakeFile from "./Generators/MakeFile";
 
-const make = new MakeFile();
+const make = new MakeFile(new ConsoleLogger());
 
 const pathOption = "-p, --path <path>";
 
@@ -55,7 +56,7 @@ program
     .command("make:exception")
     .name("make:exception")
     .argument("<exceptionName>", "ExceptionName")
-    .option("-u, --unknown", "UnknownException", false)
+    .option("-u, --isUnknown", "UnknownException", false)
     .option(pathOption, "Destination Exception Path", "./src/Exceptions")
     .description("Create Exception file example")
     .version("0.1.1")

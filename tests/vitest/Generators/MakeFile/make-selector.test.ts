@@ -1,24 +1,25 @@
 import { existsSync } from "node:fs";
 import { unlink } from "node:fs/promises";
 
+import { NullLogger } from "@odg/log";
 import { vi } from "vitest";
 
-import MakeFile from "../../../../src/Generators/MakeFile";
+import MakeFile from "src/Generators/MakeFile";
 
 describe("makeSelectors Test", () => {
     vi.spyOn(console, "log").mockImplementation(() => void 0);
 
-    const make = new MakeFile();
+    const make = new MakeFile(new NullLogger());
 
     const path = `${process.cwd()}/tests/vitest/cache`;
-    const filePath = `${path}/ExampleSelector.ts`;
+    const filePath = `${path}/Example1Selector.ts`;
 
     afterAll(async () => {
-        await unlink(`${path}/ExampleSelector.ts`).catch(() => null);
+        await unlink(`${path}/Example1Selector.ts`).catch(() => null);
     });
 
-    test("Generate ExampleSelectors", async () => {
-        await expect(make.makeSelectors("Example", { path: path }))
+    test("Generate Example1Selectors", async () => {
+        await expect(make.makeSelectors("Example1", { path }))
             .resolves
             .toBeUndefined();
 

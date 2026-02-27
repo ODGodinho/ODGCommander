@@ -1,14 +1,15 @@
 import { existsSync } from "node:fs";
 import { unlink } from "node:fs/promises";
 
+import { NullLogger } from "@odg/log";
 import { vi } from "vitest";
 
-import MakeFile from "../../../../src/Generators/MakeFile";
+import MakeFile from "src/Generators/MakeFile";
 
 describe("makeEvent Test", () => {
     vi.spyOn(console, "log").mockImplementation(() => void 0);
 
-    const make = new MakeFile();
+    const make = new MakeFile(new NullLogger());
 
     const path = `${process.cwd()}/tests/vitest/cache`;
     const filePath1 = `${path}/LoginException.ts`;
@@ -22,7 +23,7 @@ describe("makeEvent Test", () => {
     });
 
     test("Generate LoginException", async () => {
-        await expect(make.makeException("Login", { path: path, unknown: false }))
+        await expect(make.makeException("Login", { path, isUnknown: false }))
             .resolves
             .toBeUndefined();
 
@@ -31,7 +32,7 @@ describe("makeEvent Test", () => {
     });
 
     test("Generate LoginUnknownException", async () => {
-        await expect(make.makeException("Login", { path: path, unknown: true }))
+        await expect(make.makeException("Login", { path, isUnknown: true }))
             .resolves
             .toBeUndefined();
 

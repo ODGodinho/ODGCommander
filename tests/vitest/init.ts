@@ -1,5 +1,4 @@
-import { writeFile, unlink } from "node:fs/promises";
-import "vitest/globals.d.ts";
+import { unlink, writeFile } from "node:fs/promises";
 
 export default void (async (): Promise<void> => {
     beforeAll(async () => writeFile("tests/vitest/cache/index.ts", ""));
